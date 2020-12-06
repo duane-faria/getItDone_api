@@ -19,7 +19,7 @@ const AdSchema = new mongoose.Schema(
     price: {
       type: Number,
     },
-    images: [{ url: String, thumbnailUrl: String }],
+    images: [{ key: String, url: String, thumbnailUrl: String }],
     createdAt: {
       type: Date,
       default: Date.now,
