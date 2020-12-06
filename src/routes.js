@@ -8,14 +8,16 @@ const multerConfig = require('./app/config/multer');
 
 const uploads = multer(multerConfig);
 
-// users
+// users register
 routes.post('/users', controllers.UserController.store);
+
+// login
+routes.post('/auth', controllers.AuthController.store);
+
+routes.use(auth);
 
 // ads
 routes.post('/ads', uploads.array('files', 10), controllers.AdController.store);
-
-routes.post('/post', controllers.AuthController.store);
-
-routes.use(auth);
+routes.get('/ads', controllers.AdController.index);
 
 module.exports = routes;
