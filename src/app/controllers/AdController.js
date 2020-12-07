@@ -13,6 +13,8 @@ class AdController {
     console.log(req.files, 'files');
     console.log(req.body, 'body');
 
+    req.body.price = Number(req.body.price);
+
     const images = files.map((file) => ({
       key: file.key,
       url: file.location,

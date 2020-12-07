@@ -16,6 +16,9 @@ const AdSchema = new mongoose.Schema(
     title: {
       type: String,
     },
+    description: {
+      type: String,
+    },
     price: {
       type: Number,
     },
@@ -37,11 +40,11 @@ const AdSchema = new mongoose.Schema(
 
 AdSchema.plugin(mongoosePaginate);
 
-AdSchema.plugin(autoIncrement.plugin, {
-  model: 'Ad',
-  field: 'adNumber',
-  startAt: 1,
-  incrementBy: 1,
-});
+// AdSchema.plugin(autoIncrement.plugin, {
+//   model: 'Ad',
+//   field: 'adNumber',
+//   startAt: 1,
+//   incrementBy: 1,
+// });
 
 module.exports = mongoose.model('Ad', AdSchema);

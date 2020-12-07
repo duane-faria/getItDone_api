@@ -27,6 +27,7 @@ class App {
   exception() {
     async function middleware(err, req, res, next) {
       const errors = await new Youch(err, req).toJSON();
+      console.log(errors);
       return res.status(500).json(errors);
     }
     this.server.use(middleware);
