@@ -3,7 +3,8 @@ const Yup = require('yup');
 
 class UserController {
   async store(req, res) {
-    console.log(req.body);
+    const { location : avatar } = req.file;
+    req.body.avatar = avatar;
 
     const schema = Yup.object().shape({
       name: Yup.string().required(),

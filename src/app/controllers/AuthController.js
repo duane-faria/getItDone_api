@@ -6,7 +6,6 @@ const models = require('../models');
 
 class AuthController {
   async store(req, res) {
-    console.log(req.body, 'body');
 
     const schema = Yup.object().shape({
       email: Yup.string().email().required(),
@@ -31,7 +30,7 @@ class AuthController {
 
     return res.json({
       token: jwt.sign(
-        { id: user._id, name: user.name, email: user.email },
+        { id: user._id, name: user.name, email: user.email, avatar: user.avatar },
         authConfig.secret,
         {
           expiresIn: authConfig.expiresIn,

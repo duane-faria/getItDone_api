@@ -3,7 +3,7 @@ const Yup = require('yup');
 
 class AdController {
   async index(req, res) {
-    const Ads = await models.Ad.find({});
+    const Ads = await models.Ad.find({},null,{ sort:{ createdAt: -1 } }).populate('user');
 
     return res.json(Ads);
   }
@@ -24,6 +24,14 @@ class AdController {
     const Ad = await models.Ad.create({ ...req.body, images });
 
     return res.json(Ad);
+  }
+
+  async getAdsByUser(req, res) {
+    const { id : user } = req.params;
+
+    const adsByUser = await models.Ad.find({ user }).populate('user');
+
+    return res.json(adsByUser);
   }
 }
 
