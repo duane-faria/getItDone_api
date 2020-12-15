@@ -40,6 +40,22 @@ const AdSchema = new mongoose.Schema(
 
 AdSchema.plugin(mongoosePaginate);
 
+AdSchema.pre('remove', async function (next) {
+  this.images.map((img) => {
+    s3.deleteObject(
+      {
+        Bucket: 'dfaria-getitdone',
+        Key: img.key,
+      },
+      function (err, data) {
+        if (err) console.log(err, err.stack);
+        // error
+        else console.log('deletado'); // deleted
+      }
+    );
+  });
+});
+
 // AdSchema.plugin(autoIncrement.plugin, {
 //   model: 'Ad',
 //   field: 'adNumber',
