@@ -17,6 +17,16 @@ const UserSchema = new mongoose.Schema({
   createdAt: { type: Date, default: Date.now },
 });
 
+UserSchema.set('toObject', { virtuals: true })
+UserSchema.set('toJSON', { virtuals: true })
+
+UserSchema.virtual('totalAds', {
+  ref: 'Ad', // The model to use
+  localField: '_id', // Find people where `localField`
+  foreignField: 'user', // is equal to `foreignField`
+  count: true // And only get the number of docs
+});
+
 UserSchema.pre('save', async function (next) {
   if (!this.isModified('password')) {
     return next();

@@ -21,4 +21,6 @@ routes.post('/ads', uploads.array('files', 10), controllers.AdController.store);
 routes.get('/ads', controllers.AdController.index);
 routes.get('/ads/user/:id', controllers.AdController.getAdsByUser);
 
+routes.get('/users', controllers.UserController.index);
+
 module.exports = routes;

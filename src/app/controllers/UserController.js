@@ -2,6 +2,13 @@ const models = require('../models');
 const Yup = require('yup');
 
 class UserController {
+
+  async index(req, res) {
+    const Users = await models.User.find({},null,{ sort:{ createdAt: -1 } }).populate('totalAds');
+
+    return res.json(Users);
+  }
+
   async store(req, res) {
     const { location : avatar } = req.file;
     req.body.avatar = avatar;

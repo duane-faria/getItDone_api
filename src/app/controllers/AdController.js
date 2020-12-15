@@ -3,7 +3,9 @@ const Yup = require('yup');
 
 class AdController {
   async index(req, res) {
-    const Ads = await models.Ad.find({},null,{ sort:{ createdAt: -1 } }).populate('user');
+    const Ads = await models.Ad.find({},null,{ sort:{ createdAt: -1 } }).populate({path:'user', populate:{
+      path:'totalAds'
+    }});
 
     return res.json(Ads);
   }
