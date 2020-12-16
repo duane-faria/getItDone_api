@@ -31,7 +31,9 @@ class AdController {
   async getAdsByUser(req, res) {
     const { id : user } = req.params;
 
-    const adsByUser = await models.Ad.find({ user }).populate('user');
+    const adsByUser = await models.Ad.find({ user }).populate({path:'user', populate:{
+      path:'totalAds'
+    }});
 
     return res.json(adsByUser);
   }
